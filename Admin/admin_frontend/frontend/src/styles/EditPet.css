@@ -1,0 +1,140 @@
+/* Wrapper */
+.edit-pet-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.edit-pet-container h2 {
+  text-align: center;
+  margin-bottom: 1.8rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Form Layout - Align label + input */
+.edit-pet-form .form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.edit-pet-form .form-row label {
+  width: 150px;
+  font-weight: 500;
+  color: #444;
+}
+
+.edit-pet-form .form-row input,
+.edit-pet-form .form-row select,
+.edit-pet-form .form-row textarea {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.edit-pet-form input:focus,
+.edit-pet-form select:focus,
+.edit-pet-form textarea:focus {
+  border-color: #4cafef;
+  box-shadow: 0px 0px 5px rgba(76, 175, 239, 0.3);
+  outline: none;
+}
+
+/* Textarea height */
+.edit-pet-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Image Preview */
+.preview-img {
+  display: block;
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.image-preview {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.image-item {
+  position: relative;
+}
+
+.image-item img {
+  max-width: 100px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.image-item button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: rgba(255, 0, 0, 0.85);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 4px 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.image-item button:hover {
+  background: rgba(200, 0, 0, 0.9);
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.btn-primary {
+  background-color: #4cafef;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #3a9ed9;
+}
+
+.btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #ccc;
+}
