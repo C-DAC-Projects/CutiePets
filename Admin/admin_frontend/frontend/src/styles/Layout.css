@@ -1,0 +1,180 @@
+/* Layout (flex-based) */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+/* Sidebar (part of document flow) */
+.sidebar {
+  /* previously fixed; now relative so main content sits next to it */
+  position: relative;
+  height: 100vh;
+  width: 250px;
+  flex: 0 0 250px;
+  background: #2f3b46; /* adjust to your sidebar color */
+  color: white;
+  overflow-y: auto;
+  transition: width 0.25s ease;
+  z-index: 1000;
+}
+
+/* collapsed sidebar width */
+.sidebar.closed {
+  width: 60px;
+  flex: 0 0 60px;
+}
+
+/* mobile behaviour (keep transform for off-canvas) */
+.sidebar.mobile {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateX(-100%);
+  width: 250px;
+}
+.sidebar.mobile.open {
+  transform: translateX(0);
+}
+
+/* Main content sits right beside the sidebar (no margin-left trick) */
+.main-content {
+  flex: 1;                   /* take remaining space */
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  margin: 0;                 /* no extra margin */
+  min-width: 0;              /* prevents overflow issues in flex */
+}
+
+/* When sidebar is collapsed we can slightly adjust padding if needed */
+.main-content.collapsed .content {
+  padding-left: 1.5rem; /* optional smaller padding when collapsed */
+}
+
+/* Topbar */
+.topbar {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 0.8rem 1.5rem; /* slightly reduced left padding to align with content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  position: sticky;
+  top: 0;
+}
+
+/* Title */
+.dashboard-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2d3b45; /* darker title color */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* User area */
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* only show avatar when name exists (JSX controls rendering) */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #4e73df;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* username style */
+.user-name {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Logout button (pill style) */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg,#ff5f60,#ff4a4b);
+  color: white;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+.logout-btn svg { /* ensure icon color is white */
+  color: white;
+  opacity: 0.95;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255,74,74,0.12);
+}
+
+/* Login button for when not logged in */
+.login-btn {
+  background: #4e73df;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #3c5cc7;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  background: #4e73df;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.45rem;
+  font-size: 1.1rem;
+  z-index: 99;
+  cursor: pointer;
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+/* Footer */
+.footer {
+  padding: 1rem 2rem;
+  text-align: center;
+  background: #fff;
+  border-top: 1px solid #e3e6f0;
+  color: #6e707e;
+}
