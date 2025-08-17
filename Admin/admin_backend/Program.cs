@@ -16,22 +16,11 @@ namespace Admin_Backend
             // ===== Services =====
 
             // CORS: allow your Vite dev app and deployed frontend
-            var allowedOrigins = new[]
-            {
-                "http://localhost:5173",
-                "https://cutiepets-frontend.up.railway.app"
-            };
-
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowReactApp", policy =>
                 {
-                    //policy.WithOrigins(allowedOrigins)
-                    //      .AllowAnyHeader()
-                    //      .AllowAnyMethod()
-                    //      .SetPreflightMaxAge(TimeSpan.FromHours(12));
-                    // If you truly want to allow any origin during debugging:
-                     policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
 
@@ -50,23 +39,18 @@ namespace Admin_Backend
                     {
                         ValidateIssuer = true,
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
-
-                        // Disable audience validation unless you set Jwt:Audience in config
                         ValidateAudience = false,
-
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(
                             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
-
                         ValidateLifetime = true
                     };
                 });
 
             builder.Services.AddAuthorization();
 
-            builder.Services.AddEndpointsApiExplorer();
-
             // Swagger + JWT support
+            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Admin API", Version = "v1" });
@@ -97,14 +81,14 @@ namespace Admin_Backend
                 });
             });
 
+            // ===== MySQL DbContext =====
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 36)),
-        mySqlOptions => mySqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
-    )
-);
-
+                options.UseMySql(
+                    builder.Configuration.GetConnectionString("DefaultConnection"),
+                    new MySqlServerVersion(new Version(8, 0, 36)),
+                    mySqlOptions => mySqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
+                )
+            );
 
             var app = builder.Build();
 
@@ -114,26 +98,19 @@ namespace Admin_Backend
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseHttpsRedirection();
             }
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseHttpsRedirection(); // Only redirect in dev
-            }
-
-
-            // Serve static files (if any)
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            // CORS must be between UseRouting and UseAuth*
             app.UseCors("AllowReactApp");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // Handle all OPTIONS preflight requests globally and apply the CORS policy
+            // Handle OPTIONS preflight globally
             app.MapMethods("{*path}", new[] { "OPTIONS" }, () => Results.Ok())
                .RequireCors("AllowReactApp");
 
