@@ -30,8 +30,7 @@ namespace Admin_Backend
                         //WithOrigins(http://localhost:5173 , https://cutiepets-frontend.up.railway.app) when deployed
                         policy.AllowAnyOrigin()
                               .AllowAnyHeader()
-                              .AllowAnyMethod()
-                              .AllowCredentials();
+                              .AllowAnyMethod();
                     });
             });
 
