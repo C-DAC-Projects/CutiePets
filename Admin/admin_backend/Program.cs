@@ -115,6 +115,12 @@ namespace Admin_Backend
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // Handle all OPTIONS requests globally with the CORS policy
+            app.MapMethods("{*path}", new[] { "OPTIONS" }, () => Results.Ok())
+               .RequireCors("AllowReactApp");
+
+
+
             app.MapControllers();
 
             app.Run();
