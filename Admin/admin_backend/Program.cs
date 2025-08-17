@@ -27,8 +27,8 @@ namespace Admin_Backend
                 options.AddPolicy("AllowReactApp",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:5173",
-                            "https://cutiepets-frontend.up.railway.app") // when deployed
+                        //WithOrigins(http://localhost:5173 , https://cutiepets-frontend.up.railway.app) when deployed
+                        policy.AllowAnyOrigin()
                               .AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowCredentials();
@@ -100,7 +100,7 @@ namespace Admin_Backend
 
             var app = builder.Build();
 
-            app.UseCors("AllowReactApp");
+            
 
             if (app.Environment.IsDevelopment())
             {
@@ -111,7 +111,7 @@ namespace Admin_Backend
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
-
+            app.UseCors("AllowReactApp");
 
             app.UseAuthentication();
             app.UseAuthorization();
