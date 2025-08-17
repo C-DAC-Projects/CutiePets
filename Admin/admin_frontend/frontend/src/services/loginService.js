@@ -1,7 +1,7 @@
 // src/services/loginService.js
 import axios from "axios";
 
-const API_BASE = "https://localhost:44337/api/auth";
+const API_BASE = "https://cutiepets-backend.up.railway.app/api/auth";
 
 export const login = async (email, password) => {
   try {
