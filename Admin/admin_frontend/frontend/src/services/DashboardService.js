@@ -4,12 +4,12 @@ import axios from "axios";
 // Create axios instances for pets and products
 const petsApi = axios.create({
   // baseURL: "https://localhost:44337/api/pet",
-  baseURL: "https://cutiepets-backend.up.railway.app/api/pet",
+  baseURL: "https://cutiepets-backend-production.up.railway.app/api/pet",
   withCredentials: true,
 });
 
 const productsApi = axios.create({
-  baseURL: "https://cutiepets-backend.up.railway.app/api/product",
+  baseURL: "https://cutiepets-backend-production.up.railway.app/api/product",
   withCredentials: true,
 });
 

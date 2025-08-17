@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://cutiepets-backend.up.railway.app/api/pet";
+const API_BASE_URL = "https://cutiepets-backend-production.up.railway.app/api/pet";
 
 // Create axios instance
 const api = axios.create({

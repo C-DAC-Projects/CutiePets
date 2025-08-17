@@ -1,7 +1,7 @@
 // src/services/ProductService.js
 import axios from "axios";
 
-const API_BASE = "https://cutiepets-backend.up.railway.app/api/product";
+const API_BASE = "https://cutiepets-backend-production.up.railway.app/api/product";
 
 const api = axios.create({
   baseURL: API_BASE,
