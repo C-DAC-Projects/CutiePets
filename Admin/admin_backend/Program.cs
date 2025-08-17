@@ -98,10 +98,13 @@ namespace Admin_Backend
             });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    new MySqlServerVersion(new Version(8, 0, 36)))
-            );
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        new MySqlServerVersion(new Version(8, 0, 36)),
+        mySqlOptions => mySqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)
+    )
+);
+
 
             var app = builder.Build();
 
@@ -113,7 +116,11 @@ namespace Admin_Backend
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseHttpsRedirection(); // Only redirect in dev
+            }
+
 
             // Serve static files (if any)
             app.UseStaticFiles();
